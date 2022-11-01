@@ -1,3 +1,5 @@
+//Import du package HTTP natif de node
+//acces a http permetant de créer un server
 const http = require('http');
 const app = require('./app');
 
@@ -12,7 +14,10 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+
+//Si l'environement sur lequel tourne le serveur envoi un port a utiliser
+const port = normalizePort(process.env.PORT || '3000');
+//Port faisant tourner l'application express
 app.set('port', port);
 
 const errorHandler = error => {
@@ -35,6 +40,7 @@ const errorHandler = error => {
   }
 };
 
+//Création du server
 const server = http.createServer(app);
 
 server.on('error', errorHandler);
@@ -44,4 +50,5 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
+//
 server.listen(port);
