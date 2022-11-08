@@ -14,7 +14,9 @@ mongoose
   .connect(
     "mongodb+srv://" +
       process.env.DB_LOGIN +
-      ":" + process.env.DB_PWD + "@cluster0.k3odr5k.mongodb.net/?retryWrites=true&w=majority",
+      ":" +
+      process.env.DB_PWD +
+      "@cluster0.k3odr5k.mongodb.net/?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
@@ -38,7 +40,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
   );
 
-  res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
+  res.setHeader("Cross-Origin-Resource-Policy", "same-site");
 
   //Authorisation requete GET, POST, PUT, DELETE, PATCH, OPTIONS
   res.setHeader(
@@ -53,6 +55,5 @@ app.use((req, res, next) => {
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/sauces", sauceRoutes);
 app.use("/api/auth", userRoutes);
-//
 
 module.exports = app;
