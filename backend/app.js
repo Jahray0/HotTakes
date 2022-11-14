@@ -23,6 +23,7 @@ mongoose
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 const app = express();
+//Helmet nous aide à sécuriser l'applications Express en définissant divers en-têtes HTTP. 
 app.use(helmet());
 
 //intercept les requet JSON ayant application.json comme content-type

@@ -4,17 +4,17 @@ const sauceCtrl = require('../controllers/sauces');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
-//CREATION D'UNE SAUCE
+//Création d'une sauce
 router.post('', auth, multer, sauceCtrl.createSauce);
-//GET UNE SAUCE
+//Get un sauce
 router.get('/:id', auth, sauceCtrl.getOneSauce);
-//GET ALL SAUCES
+//Get AllSauces
 router.get('', auth, sauceCtrl.getAllSauces);
-//MODIFICATION
+//Modification d'une sauce
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);
-//SUPRESSION
+//Suppression d'une sauce
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
-//LIKE/DISLIKE
+//Like/Dislike
 router.post('/:id/like', auth, sauceCtrl.likeSauce);
 
 module.exports = router;
