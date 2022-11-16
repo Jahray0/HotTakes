@@ -5,22 +5,17 @@ const path = require("path");
 
 require("dotenv").config();
 
-const sauceRoutes = require("./routes/sauces");
-const userRoutes = require("./routes/user");
-const { Server } = require("http");
+const sauceRoutes = require("./routes/sauces");  //importation du router sauces
+const userRoutes = require("./routes/user");     //importation du router user
+const {Server}  = require("http");
 
 //Logique pour se connecter a mongo DB
-mongoose
-  .connect(
-    "mongodb+srv://" +
-      process.env.DB_LOGIN +
-      ":" +
-      process.env.DB_PWD +
-      "@cluster0.k3odr5k.mongodb.net/?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
+mongoose.connect('mongodb+srv://' + process.env.DB_LOGIN + ':' + process.env.DB_PWD + '@' + process.env.DB_CLUSTER,
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
+
 
 const app = express();
 //Helmet nous aide à sécuriser l'applications Express en définissant divers en-têtes HTTP. 

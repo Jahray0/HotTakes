@@ -31,7 +31,7 @@ exports.createSauce = (req, res, next) => {
         sauce.save()
             //201 => ressource créé
             .then(() => res.status(201).json({ message: 'Votre sauce a bien été enregistré'}))
-            .catch(error => res.status(400).json({ error }));
+            .catch(error => res.status(400).json({ message: `Erreur 400 Bad request` }));
     };
 };
 
@@ -40,14 +40,14 @@ exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
         .then(sauces => res.status(200).json(sauces))
          //Objet non trouvé
-        .catch(error => res.status(404).json({ error }));
+        .catch(error => res.status(404).json({ message: `Objet non trouvé` }));
 };
 
 //Récuperation de la liste de sauces
 exports.getAllSauces = (req, res, next) => {
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => res.status(400).json({ message: `Erreur 400 Bad request` }));
 };
 
 //Modification d'une sauce
@@ -88,7 +88,7 @@ exports.modifySauce = (req, res, next) => {
         //et l'id correspond a celui des parametres
         Sauce.updateOne({ _id: req.params.id}, { ...sauceObject, _id: req.params.id})
             .then(() => res.status(200).json({ message: 'Sauce modifiée'}))
-            .catch(error => res.status(400).json({ error }));
+            .catch(error => res.status(400).json({ message: `Erreur 400 Bad request` }));
     } else {
         res.status(401).json({ error: 'Présence de caractères non autorisés'});
     };
@@ -103,10 +103,10 @@ exports.deleteSauce = (req, res, next) => {
             fs.unlink(`images/${filename}`, () => {
                 Sauce.deleteOne({ _id: req.params.id })
                     .then(() => res.status(200).json({ message: 'Sauce supprimée'}))
-                    .catch(error => res.status(400).json({ error }));
+                    .catch(error => res.status(400).json({ message: `Erreur 400 Bad request` }));
             });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ message: `La requete n'a pas pu etre traité ` }));
 };
 
 //Gestion des "Likes/Dislikes"
@@ -138,5 +138,5 @@ exports.likeSauce = (req, res, next) => {
             sauce.save();
             res.status(201).json({ message: 'Like / Dislike mis à jour' });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ message: `La requete n'a pas pu etre traité ` }));
 };

@@ -13,9 +13,9 @@ exports.signup = (req, res, next) => {
       });
       user.save()
         .then(() => res.status(201).json({ message: 'L\'utilisateur a bien été créé !' }))
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => res.status(400).json({ message: 'Un probleme est survenu. Merci de rentrer un email et un mot de passe valide.' }));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ message: 'Veuillez saisir un email et/ou un mot de passe.' }));
 };
 
 //Middleware login (connexion utilisateur existant)
@@ -40,8 +40,8 @@ exports.login = (req, res, next) => {
                       )
                   });
               })
-              .catch(error => res.status(500).json({ error }));
+              .catch(error => res.status(500).json({ message: `Une erreur d'authentification est survenu merci d'essayer a nouveau sinon contacter le support` }));
       })
       //L'utilisateur n'existe pas
-      .catch(error => res.status(500).json({ error }));
+      .catch(error => res.status(500).json({ message: `Une erreur d'authentification est survenu merci d'essayer a nouveau sinon contacter le support` }));
 };

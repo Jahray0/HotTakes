@@ -4,13 +4,11 @@ Ce dépôt contient le _frontend_ et le _backend_ de l'application Piiquante. Un
 ## Démarrage 
 Ces instructions vont vous permettre de lancer le backend et le front end.
 
-## Démarrage Frontend
-Pour cela vous devez vous mettre dans le dossier Frontend de l'appication et lancer la commande :
-`npm start`
 
-## Démarrage Backend
-Pour cela vous devez vous mettre dans le dossier Backend de l'appication et lancer la commande :
-`nodemon server`
+Prérequis -> disposer du frontend de l'application. (Si besoin, cloner le repository contenant 
+le frontend de l'application : https://github.com/Jahray0/Web-Developer-P6-master)
 
-## .env config
-Il vous faudra remplir les 3 variables contenue dans le fichier .env 
+Installer les dépendances à la racine de chacun des dossiers /frontend et /backend via la commande : "npm install"
+À la racine du dossier /frontend, démarrer le serveur du frontend avec la commande : "npm run start" ou "ng serve"
+À la racine du dossier /backend, remplcer les variables contenu dans le fichier ".env"
+À la racine du dossier /backend, démarrer le serveur du backend avec la commande : "npm run start" ou "nodemon server"
