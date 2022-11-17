@@ -1,0 +1,79 @@
+1 - Avoir un livrable plus léger.
+2 - Ajouter une variable d'envirionement pour le cluster mongoDB.
+3 - Afficher un erreur lorsque l'on ne rentre pas de mot de passe (postman).
+3 - Verifier la saisie de l'email et n'authoriser que les adresse email valide.
+4 - Demander un mot de passe avec minimum 8 caracteres, 1 majuscule et 2 chiffres.
+5 - Teste avec des format d'image different pour les sauces.
+
+1 - OK
+
+2 - OK :  DB_LOGIN = user2
+	  DB_PWD = Piquante123
+	  DB_CLUSTER = cluster0.k3odr5k.mongodb.net/?retryWrites=true&w=majority
+	  RST = MOT_DE_PASSE_SECURISE_951
+
+3 - OK : Utilisation de validator.isEmail(email) + ajout controleEmail sur la route singup
+
+	- Teste avec Postman : POST sur http://www.localhost:3000/api/auth/signup
+			     Body : {}
+			     Réponse : {"message": "Veuillez entrer un nom d'utilisateur et un mot de passe."}
+
+
+	- Teste avec Postman : POST sur http://www.localhost:3000/api/auth/signup
+			     Body : {
+   					 "email" : "jaegle.maxime@gmail.com",
+   					 "password" : ""
+				    }
+			     Réponse : {"message": "Veuillez entrer un mot de passe avec au moins 8 caracteres, une majuscule, une mminuscule et au moins 2 chiffres ."}
+
+
+	- Teste avec Postman : POST sur http://www.localhost:3000/api/auth/signup
+			     Body : {
+   					 "email" : "jaegle.maxime@gmail.com",
+   					 "password" : "Test123"
+				    }
+			     Réponse : {"message": "Veuillez entrer un mot de passe avec au moins 8 caracteres, une majuscule, une mminuscule et au moins 2 chiffres ."}
+
+
+	- Teste avec Postman : POST sur http://www.localhost:3000/api/auth/signup
+			     Body : {
+   					 "email" : "jaegle.maxime@gmailcom",
+   					 "password" : "TestTest123"
+				    }
+			     Réponse : {"message": "l'email jaegle.maxime@gmailcom n'est pas valide"}
+
+
+	- Teste avec Postman : POST sur http://www.localhost:3000/api/auth/signup
+			     Body : {
+   					 "email" : "jaegle.maximegmail.com",
+   					 "password" : "TestTest123"
+				    }
+			     Réponse : {"message": "l'email jaegle.maximegmail.com n'est pas valide"}
+
+
+	- Teste avec Postman : POST sur http://www.localhost:3000/api/auth/signup
+			     Body : {
+   					 "email" : "jaegle.maxime@gmail.com",
+   					 "password" : "TestTest123"
+				    }
+			     Réponse : {"message": "L'utilisateur a bien été créé !"}
+
+
+
+
+			     
+
+4 - OK : Ajout d'un middleware possword.js qui controle qu'on ai bien rentré un mot de passe 
+	 et demande minimum 8 caracteres, 1 majuscule et 2 chiffres. 
+
+	
+
+5 - OK : Fonctionne avec les formats suivant (petite taille) : 
+		- Jpg : 190 ko => OK
+		- Jpeg : 51 ko => OK
+		- Png : 105 ko => OK
+
+	 Fonctionne avec les formats suivant : 
+		- Jpg :  3960 ko => OK
+		- Jpeg : 1512 ko => OK
+		- Png : 11995 ko => OK
